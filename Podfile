@@ -14,4 +14,6 @@ target 'Tinder_Analog' do
   pod 'JGProgressHUD'
   pod 'PromiseKit'
   pod 'PromiseKit/MapKit'
+pod 'TableKit'
+  pod 'IQKeyboardManagerSwift'
 end

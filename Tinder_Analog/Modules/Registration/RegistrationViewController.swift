@@ -15,7 +15,6 @@ import Firebase
 class RegistrationViewController: UIViewController {
     // MARK: - Properties
     var presenter: RegistrationPresenterInterface?
-    var registrationViewModel = RegistrationViewModel()
     
     lazy var selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -100,7 +99,8 @@ extension RegistrationViewController {
     }
     private func setupRegistrationViewModelObserver() {
         [fullNameTextField, emailTextField, passwordTextField].forEach( {$0.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)} )
-        registrationViewModel.isFormValidObserver = { [weak self] (isFormValid) in
+        
+        RegistrationViewModel.shared.isFormValidObserver = { [weak self] (isFormValid) in
             guard let self = self else { return }
             self.registerButton.isEnabled = isFormValid
             if isFormValid {
@@ -141,11 +141,11 @@ extension RegistrationViewController {
     
     @objc fileprivate func handleTextChange(textField: UITextField) {
         if textField == fullNameTextField {
-            registrationViewModel.fullName = textField.text
+            RegistrationViewModel.shared.fullName = textField.text
         } else if textField == emailTextField {
-            registrationViewModel.email = textField.text
+            RegistrationViewModel.shared.email = textField.text
         } else {
-            registrationViewModel.password = textField.text
+            RegistrationViewModel.shared.password = textField.text
         }
     }
     

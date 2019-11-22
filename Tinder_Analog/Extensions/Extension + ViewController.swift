@@ -46,4 +46,18 @@ extension UIViewController {
             viewWithTag.removeFromSuperview()
         }
     }
+    
+    func showClosedErrorAlert(labelText: String?, detailText: String?, closedAction: @escaping (() -> Void)) {
+        let errorAlert = JGProgressHUD(style: .dark)
+        errorAlert.indicatorView = JGProgressHUDErrorIndicatorView()
+        errorAlert.textLabel.text = labelText
+        errorAlert.detailTextLabel.text = detailText
+        errorAlert.show(in: view)
+        errorAlert.tapOnHUDViewBlock = { (hud) in
+            closedAction()
+        }
+        errorAlert.tapOutsideBlock = { (hud) in
+            closedAction()
+        }
+    }
 }

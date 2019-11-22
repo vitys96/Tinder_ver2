@@ -16,14 +16,14 @@ class RegistrationPresenter {
     weak private var view: RegistrationView?
     var interactor: RegistrationInteractorInput?
     private let router: RegistrationWireframeInterface
-
+    
     // MARK: - Initialization and deinitialization -
     init(interface: RegistrationView, interactor: RegistrationInteractorInput?, router: RegistrationWireframeInterface) {
         self.view = interface
         self.interactor = interactor
         self.router = router
     }
-
+    
 }
 
 // MARK: - RegistrationPresenterInterface -
@@ -37,6 +37,10 @@ extension RegistrationPresenter: RegistrationPresenterInterface {
     
     func createUser(userModel: RegistrationViewModel) {
         self.view?.startLoading()
+        guard userModel.image != nil else {
+            self.failureRegistration(with: "Пожалуйста, загрузите фотографию")
+            return
+        }
         self.interactor?.createUser(userModel: userModel)
     }
 }
@@ -44,8 +48,10 @@ extension RegistrationPresenter: RegistrationPresenterInterface {
 // MARK: - RegistrationInteractorOutput -
 extension RegistrationPresenter: RegistrationInteractorOutput {
     func fetchedRegistration() {
+        self.view?.stopLoading()
         view?.showSuccessAlert(labelText: nil, detailText: nil)
     }
+    
     
     func failureRegistration(with error: String) {
         self.view?.stopLoading()

@@ -8,5 +8,6 @@
 import UIKit
 protocol Alertable {
     func showErrorAlert(labelText: String?, detailText: String?)
+    func showClosedErrorAlert(labelText: String?, detailText: String?, closedAction: @escaping (() -> Void))
     func showSuccessAlert(labelText: String?, detailText: String?)
 }

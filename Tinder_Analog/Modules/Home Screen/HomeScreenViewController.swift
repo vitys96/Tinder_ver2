@@ -10,21 +10,21 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeScreenViewController: UIViewController {
     // MARK: - Properties
     var presenter: HomeScreenPresenterInterface?
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
-    let buttonsStackView = HomeBottomControlsStackView()
+    let bottomControls = HomeBottomControlsStackView()
     var cardViewData: [CardView.Data]? = []
     
     // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        presenter?.viewDidLoad()
-        setup()
+        presenter?.fetchUsersFirebase()
     }
     
 }
@@ -32,22 +32,32 @@ class HomeScreenViewController: UIViewController {
 // MARK: - UI Configuration
 extension HomeScreenViewController {
     private func configureUI() {
-        let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, buttonsStackView])
+        let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomControls])
         overallStackView.axis = .vertical
         view.addSubview(overallStackView)
         overallStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
         overallStackView.isLayoutMarginsRelativeArrangement = true
         overallStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
-        
         overallStackView.bringSubviewToFront(cardsDeckView)
+        bottomControls.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
+        topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        
     }
     
-    private func setup() {
-        cardViewData?.forEach({ (data) in
+    private func setupCards(data: [CardView.Data]) {
+        data.forEach({ (data) in
+            print (data)
             let cardView = CardView(data: data)
             cardsDeckView.addSubview(cardView)
             cardView.fillSuperview()
         })
+    }
+    
+    @objc private func handleRefresh() {
+        presenter?.fetchUsersFirebase()
+    }
+    @objc private func handleSettings() {
+        presenter?.settingsDidSelect()
     }
 }
 
@@ -55,6 +65,6 @@ extension HomeScreenViewController {
 // MARK: - HomeScreenView
 extension HomeScreenViewController: HomeScreenView {
     func displayData(_ data: [CardView.Data]) {
-        cardViewData = data
+        setupCards(data: data)
     }
 }

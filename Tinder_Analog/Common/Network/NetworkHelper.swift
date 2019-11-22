@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SDWebImage
 
 class NetworkHelper {
     
@@ -37,11 +38,11 @@ class NetworkHelper {
                     }
                     let imageUrl = imageUrl?.absoluteString ?? ""
                     let uid = Auth.auth().currentUser?.uid ?? ""
-                    let docData = ["uid" : uid,
-                                   "fullName" : name,
-                                   "email" : email,
-                                   "password" : passwd,
-                                   "imageUrl" : imageUrl]
+                    let docData: [String : Any] = ["uid" : uid,
+                                                   "fullName" : name,
+                                                   "email" : email,
+                                                   "password" : passwd,
+                                                   "imageUrl" : [imageUrl]]
                     Firestore.firestore().collection("Users").document(uid).setData(docData) { (error) in
                         if let err = error {
                             completion(err)
@@ -52,6 +53,35 @@ class NetworkHelper {
                 }
             }
         }
+    }
+    
+    static func fetchUserData(completion: @escaping (User?) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            completion(nil)
+            return
+        }
+        Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, error) in
+            if let _ = error {
+                completion(nil)
+                return
+            }
+            guard let dictData = snapshot?.data() else {
+                completion(nil)
+                return }
+            completion(User(dictionary: dictData))
+        }
+    }
+    static func fetchUserPhotos(imageUrls: [String], completion: @escaping ([UIImage]?) -> Void) {
+        let downloader = SDWebImageManager()
+        var arrayOfImages: [UIImage] = []
+        let urls = imageUrls.map( {URL(string: $0)} )
+        urls.forEach({
+            downloader.loadImage(with: $0, options: [.retryFailed, .highPriority], progress: nil) { (image, _, _, _, _, _) in
+                guard let image = image else { return }
+                arrayOfImages.append(image)
+            }
+        })
+        completion(arrayOfImages)
     }
     
 }

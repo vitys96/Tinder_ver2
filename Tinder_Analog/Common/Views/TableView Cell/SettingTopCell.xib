@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SettingTopCell" customModule="Tinder_Analog" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="460" height="303"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SiH-6z-KVD">
+                    <rect key="frame" x="16" y="16" width="207" height="271"/>
+                    <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <state key="normal" title="Выбрать фото">
+                        <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </state>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="eEO-JF-N0c">
+                    <rect key="frame" x="239" y="16" width="205" height="271"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqs-wh-VXd">
+                            <rect key="frame" x="0.0" y="0.0" width="205" height="127.5"/>
+                            <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <state key="normal" title="Выбрать фото">
+                                <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itP-na-coJ">
+                            <rect key="frame" x="0.0" y="143.5" width="205" height="127.5"/>
+                            <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <state key="normal" title="Выбрать фото">
+                                <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </state>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="eEO-JF-N0c" secondAttribute="trailing" constant="16" id="65R-mr-zbr"/>
+                <constraint firstItem="SiH-6z-KVD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="7lp-NB-G2u"/>
+                <constraint firstAttribute="bottom" secondItem="eEO-JF-N0c" secondAttribute="bottom" constant="16" id="HIz-y1-BQL"/>
+                <constraint firstAttribute="bottom" secondItem="SiH-6z-KVD" secondAttribute="bottom" constant="16" id="JdP-YD-iux"/>
+                <constraint firstItem="SiH-6z-KVD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="PTw-Sj-0gd"/>
+                <constraint firstItem="SiH-6z-KVD" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.45" id="k07-5f-rgH"/>
+                <constraint firstItem="eEO-JF-N0c" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="okD-6q-KNu"/>
+                <constraint firstItem="eEO-JF-N0c" firstAttribute="leading" secondItem="SiH-6z-KVD" secondAttribute="trailing" constant="16" id="udq-MB-B3h"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageButton1" destination="SiH-6z-KVD" id="lIE-B3-NsP"/>
+                <outlet property="imageButton2" destination="nqs-wh-VXd" id="1Eg-MA-Heg"/>
+                <outlet property="imageButton3" destination="itP-na-coJ" id="O4i-Rc-asH"/>
+            </connections>
+            <point key="canvasLocation" x="217" y="-59"/>
+        </view>
+    </objects>
+</document>

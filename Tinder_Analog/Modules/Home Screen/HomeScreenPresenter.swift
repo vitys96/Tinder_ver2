@@ -28,31 +28,32 @@ class HomeScreenPresenter {
 
 // MARK: - HomeScreenPresenterInterface -
 extension HomeScreenPresenter: HomeScreenPresenterInterface {
-    
-    func viewWillAppear() {
-       
+    func settingsDidSelect() {
+        self.router.navigate(to: .settingsVC)
     }
-    func viewDidLoad() {
-         displayData()
+    
+    func fetchUsersFirebase() {
+        self.view?.startLoading()
+        self.interactor?.fetchDataFirebase()
     }
 }
 
 // MARK: - HomeScreenInteractorOutput -
 extension HomeScreenPresenter: HomeScreenInteractorOutput {
-    
+    func fetchedData(data: [User]) {
+        self.view?.stopLoading()
+        let dataArray = data.map { CardView.Data(
+            name: $0.name,
+            age: $0.age,
+            profession: $0.profession,
+            imageNames: $0.imageUrl)
+        }
+        view?.displayData(dataArray)
+    }
 }
 
 // MARK: - Private methods
 extension HomeScreenPresenter {
-    private func displayData() {
-        
-        let oneData = CardView.Data(name: "Лиза", age: "23", profession: "programmer", imageNames: ["kelly1", "kelly2", "kelly3"])
-        let twoData = CardView.Data(name: "Лиза", age: "23", profession: "programmer", imageNames: ["123"])
-        let advertise = CardView.Data(name: "Johanna", age: nil, profession: "dsjdh", imageNames: ["jane1", "jane2", "jane3"])
-        
-        view?.displayData([oneData, twoData, advertise])
-        
-    }
-
+    
 }
 

@@ -11,7 +11,7 @@ import JGProgressHUD
 
 struct AlertManager {
     private static var hud: JGProgressHUD?
-//    private static var currentAlert: UIView?
+    //    private static var currentAlert: UIView?
     static func closeCurrentAlert(completion: (()->())? = nil) {
         
     }
@@ -35,6 +35,23 @@ struct AlertManager {
         errorAlert.show(in: view)
         errorAlert.tapOutsideBlock = { (hud) in
             hud.dismiss()
+        }
+    }
+//    static func showClosedErrorAlert(labelText: String? = nil, detailText: String?, closedAction: (() -> Void)? = nil) {
+//
+//    }
+    
+    static func showClosedErrorAlert(labelText: String? = nil, detailText: String?, on view: UIView, completion: (() -> Void)? = nil) {
+        let errorAlert = JGProgressHUD(style: .dark)
+        errorAlert.indicatorView = JGProgressHUDErrorIndicatorView()
+        errorAlert.textLabel.text = labelText
+        errorAlert.detailTextLabel.text = detailText
+        errorAlert.show(in: view)
+        errorAlert.tapOnHUDViewBlock = { (hud) in
+            completion?()
+        }
+        errorAlert.tapOutsideBlock = { (hud) in
+            completion?()
         }
     }
     

@@ -20,11 +20,15 @@ class HomeScreenRouter {
 extension HomeScreenRouter: HomeScreenWireframeInterface {
     
     func navigate(to option: HomeScreenNavigationOption) {
-//        switch option {
-//        case .firstModule:
-//              openFirstModule()
-//        case .secondModule(let someData):
-        //      openSecondModule(with someData)
+        let vc: UIViewController!
+        switch option {
+        case .settingsVC:
+            vc = SettingsConfigurator.createModule()
+        }
+//        if vc is UINavigationController {
+            viewController?.present(vc, animated: true, completion: nil)
+//        } else {
+//            viewController?.navigationController?.pushViewController(vc, animated: true)
 //        }
     }
 }

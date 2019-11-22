@@ -9,12 +9,13 @@
 import UIKit
 
 struct RegistrationViewModel {
+    static var shared = RegistrationViewModel()
     
     var fullName: String? { didSet { checkFormValidity() } }
     var email: String? { didSet { checkFormValidity() } }
     var password: String? { didSet { checkFormValidity() } }
     var image: UIImage? { didSet { checkFormValidity() } }
-    var isFormValidObserver: ((Bool) -> ())? = nil
+    var isFormValidObserver: ((Bool) -> Void)? = nil
     
     fileprivate func checkFormValidity() {
         let isFormValid =

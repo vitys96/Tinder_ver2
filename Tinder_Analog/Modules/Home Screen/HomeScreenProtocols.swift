@@ -13,8 +13,7 @@ import Foundation
 
 //MARK: Wireframe -
 enum HomeScreenNavigationOption {
-    //    case firstModule
-    //    case secondModule(someData)
+        case settingsVC
 }
 
 protocol HomeScreenWireframeInterface: class {
@@ -25,6 +24,8 @@ protocol HomeScreenWireframeInterface: class {
 protocol HomeScreenPresenterInterface: class {
 
     var interactor: HomeScreenInteractorInput? { get set }
+    func fetchUsersFirebase()
+    func settingsDidSelect()
     
     // MARK: - Lifecycle -
     func viewDidLoad()
@@ -47,17 +48,20 @@ extension HomeScreenPresenterInterface {
 protocol HomeScreenInteractorOutput: class {
 
     /* Interactor -> Presenter */
+    func fetchedData(data: [User])
 }
 
 protocol HomeScreenInteractorInput: class {
 
     var presenter: HomeScreenInteractorOutput?  { get set }
+    
+    func fetchDataFirebase()
 
     /* Presenter -> Interactor */
 }
 
 //MARK: View -
-protocol HomeScreenView: class {
+protocol HomeScreenView: class, Alertable, Loadable {
 
     var presenter: HomeScreenPresenterInterface?  { get set }
     func displayData(_ data: [CardView.Data])
