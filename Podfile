@@ -6,7 +6,7 @@ target 'Tinder_Analog' do
   use_frameworks!
 
   # Pods for Tinder_Analog
- pod 'Firebase/Firestore’
+  pod 'Firebase/Firestore’
   pod 'Firebase/Auth’
   pod 'Firebase/Storage’
   pod 'Firebase/Core’
@@ -14,6 +14,6 @@ target 'Tinder_Analog' do
   pod 'JGProgressHUD'
   pod 'PromiseKit'
   pod 'PromiseKit/MapKit'
-pod 'TableKit'
+  pod 'TableKit'
   pod 'IQKeyboardManagerSwift'
 end
